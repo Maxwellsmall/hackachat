@@ -1,0 +1,17 @@
+{
+  "name": "hackatime",
+  "version": "1.0.0",
+  "description": "an ai powered chatbot for hackclubers",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter client dev\" \"pnpm --filter server start:dev",
+    "client": "pnpm --filter client dev",
+    "server": "pnpm --filter server start:dev",
+    "build": "pnpm --filter client build && pnpm --filter server build"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.5",
+    "dotenv": "^18.0.5"
+  }
+}
