@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpClient } from '@nestjs/http-client';
 
@@ -15,7 +19,7 @@ export class AuthService {
     const client_id = this.config.get<string>('HACKCLUB_AUTH_CLIENT_ID');
 
     return {
-      url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=name+verification_status`,
+      url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=slack_id+verification_status`,
     };
   }
 
@@ -37,9 +41,30 @@ export class AuthService {
       grant_type: 'authorization_code',
     };
 
-    const req = await this.httpClient.post(
-      'https://auth.hackclub.com/oauth/token',
-      { json: reqBody },
-    );
+    const oauthRes = await this.httpClient.post<{
+      access_token: string;
+    }>('https://auth.hackclub.com/oauth/token', {
+      json: reqBody,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (oauthRes.status !== 200)
+      throw new InternalServerErrorException(
+        `Failed to exchange code for token: ${oauthRes.status} ${oauthRes.statusText}`,
+      );
+
+    console.log(oauthRes.data);
+
+    const hackclubUserData = await this.httpClient.get<{
+      identity: {
+        ysws_eligible: boolean;
+        primary_email: string;
+        id: string;
+      };
+    }>('https://auth.hackclub.com/api/v1/me', {
+      headers: { Authorization: `Bearer ${oauthRes.data.access_token}` },
+    });
+
+    return hackclubUserData;
   }
 }
