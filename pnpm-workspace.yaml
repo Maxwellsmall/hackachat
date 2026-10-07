@@ -3,6 +3,7 @@ packages:
   - server
 
 allowBuilds:
+  '@openrouter/sdk': true
   "@parcel/watcher": true
   '@scarf/scarf': false
   unrs-resolver: true
