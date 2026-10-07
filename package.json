@@ -5,7 +5,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"pnpm --filter client dev\" \"pnpm --filter server start:dev",
+    "dev": "concurrently \"pnpm --filter client dev\" \"pnpm --filter server start:dev\"",
     "client": "pnpm --filter client dev",
     "server": "pnpm --filter server start:dev",
     "build": "pnpm --filter client build && pnpm --filter server build"
