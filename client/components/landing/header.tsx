@@ -1,75 +1,89 @@
-import React from 'react';
-import { Button } from '../ui/button';
-import { ArrowRight, Moon, Sun } from 'lucide-react';
-// import { useTheme } from '../../hooks/useTheme';
+"use client"
 
-interface landingHeaderProps {
-    onOpenChat: () => void;
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight, Moon, Sun } from "lucide-react"
+import { useState } from "react";
+
+
+
+const Header = () => {
+    const pathname = usePathname()
+    const [darkMode, setDarkMode] = useState(false)
+  return (
+    <>
+<div className="sticky-top top-0 z-40 w-full border-b border-zinc-200/70 bg-[#FAFAFA]/90 backdrop-blur-md">
+    <div className="flex justify-between items-center px-10 py-5">
+        <div className="flex justify-between items-center">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white shadow-xs group-hover: bg-zinc-800 transition-colors">
+            <svg
+            className="w-4 h-4 text-white"
+            viewBox="0 0 24 24"
+            fill='none'
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            >
+                <rect width="18" height="18" x="3" y="3" rx="4"/>
+                <path d="m8 12 3 3 5-5" />
+            </svg>
+        </div>
+           <div className="flex flex-col items-start">
+             <h2 className="text-lg font-bold tracking-tight text-zinc-900 ml-2">
+                Hackchat 
+            </h2>
+            <span className="text-[12px] text-zinc-500/70 ml-2">Thirdspace</span>
+           </div>
+        </div>
+
+            <div className="hidden md:flex items-center space-x-8">
+                <p className={
+                    pathname === "/" 
+                    ? "text-sm font-bold text-zinc-900"
+                    : "text-sm font-medium text-zinc-700 hover: text-zinc-900 transition-colors"
+                }>
+                    <Link href="/">Demo</Link>
+                </p>
+                
+                <p className={
+                    pathname === "/whyfree"
+                    ? "text-sm font-bold text-zinc-900"
+                    : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transition-colors"
+                }
+                >
+                    <Link href="/whyfree">Why Free</Link>
+                </p>
+                <p className={
+                    pathname === "/privacy"
+                    ? "text-sm font-bold text-zinc-900"
+                    : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transitions-colors"
+                    }
+                    >
+                        <Link href="/privacy">privacy</Link>
+                </p>
+                <Button onClick={() => setDarkMode(!darkMode)} className="bg-transparent text-zinc-900 !hover-none">
+                    {darkMode
+
+                    ? (
+                        <Sun/>
+                    ) : (
+                        <Moon/>
+                    )
+                     
+                    }
+                </Button>
+                    <Button>
+                        <span>Open Chat</span>
+                        <ArrowRight className="w-3.5 h-3.5"/>
+                    </Button>
+            </div>
+    </div>
+
+    </div>
+    </>
+  )
 }
 
-export const LandingHeader: React.FC<landingHeaderProps> = ({ onOpenChat }) => {
-    // const { theme, changeTheme } = useTheme();
-
-    // const toggleTheme = () => {
-    //     changeTheme(theme === 'dark' ? 'light' : 'dark');
-    // };
-
-    return (
-        <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur-xs">
-            <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-                <div className="flex h-7 w-7 items-center justify-center rounded-[var(--radius)] bg-primary text-primary-foreground font-mono font-bold text-xs border border-primary">
-                    H
-                </div>
-                <div className="flex flex-col">
-                    <span className="font-display font-semibold text-sm tracking-tight text-foreground leading-none">
-                        Hackachat
-                    </span>
-                    <span className="text-[10px] text-muted-foreground tracking-tight leading-none mt-1">
-                        Third space
-                    </span>
-                </div>
-            </div>
-        <nav className="flex items-center gap-2 sm:gap-3">
-        <a
-        href="#live-demo"
-        className="hidden sm:inline-block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
-        >
-            Demo
-        </a>
-        <a
-        href="#why-free"
-        className="hidden sm:inline-block text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
-        >
-            why free
-        </a>
-        <a
-        href="#privacy"
-        className="hidden sm:inline-block text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
-        >
-            Privacy
-        </a>
-
-        <button
-        variant="ghost"
-        size="icon"
-        // onClick={toggleTheme}
-        className="h-8 w-8 text-muted-foreground hover:text-foreground"
-        title="Toggle theme"
-        >
-            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4"/>}
-        </button>
-
-        <button
-          size="sm"
-        //   onClick={toggleTheme}
-          className="h-8 text-xs font-medium bg-primary hover:bg-primary/90 text-primary-foreground shadows-xs gap-1.5"
-          >
-            <span>Open Chat</span>
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
-        </nav>
-        
-        
-    </header>
- );
-};
+export default Header

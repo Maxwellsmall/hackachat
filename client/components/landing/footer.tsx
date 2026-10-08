@@ -1,7 +1,5 @@
 import React from 'react';
-import { SITE_COPY } from '../../lib/copy';
-import { Github, ExternalLink } form 'lucide-react';
-import { Separator } from '../ui/separator';
+import { GitBranch, ExternalLink } from 'lucide-react';
 
 export const  LandingFooter: React.FC = () => {
     return (
