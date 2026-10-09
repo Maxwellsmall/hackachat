@@ -20,6 +20,7 @@ async function bootstrap() {
     .setDescription('API documentation for Hackachat')
     .setVersion('1.0')
     .addServer(process.env.APP_URL!)
+    .addBearerAuth()
     .build();
 
   const documentFactory = () =>

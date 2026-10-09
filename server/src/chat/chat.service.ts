@@ -2,6 +2,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { HttpClient } from '@nestjs/http-client';
 import { ChatResponseDto, ModelResponseDto, SendMessageDto } from './dto';
@@ -62,6 +63,7 @@ export class ChatService {
   }
 
   async checkEligibility(req: Request) {
+    if (!req.headers.authorization) throw new UnauthorizedException();
     const hackclubUserData = await this.httpClient.get<{
       identity: {
         ysws_eligible: boolean;
@@ -71,7 +73,7 @@ export class ChatService {
       };
     }>('https://auth.hackclub.com/api/v1/me', {
       headers: {
-        Authorization: `Bearer ${req.headers.authorization}`,
+        Authorization: `${req.headers.authorization || (req.headers['Authorization'] as string)}`,
       },
     });
 
