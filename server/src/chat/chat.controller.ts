@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ModelResponseDto, SendMessageDto } from './dto';
+import { type Request } from 'express';
 
 @Controller('chat')
 export class ChatController {
@@ -18,7 +19,11 @@ export class ChatController {
   }
 
   @Post('/send')
-  sendMessage(@Body() sendMessageDto: SendMessageDto) {
+  async sendMessage(
+    @Body() sendMessageDto: SendMessageDto,
+    @Req() req: Request,
+  ) {
+    await this.chatService.checkEligibility(req);
     return this.chatService.sendMessage(sendMessageDto);
   }
 }

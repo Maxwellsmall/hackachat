@@ -92,6 +92,7 @@ export class AuthService {
       name: slackUserData.data.displayName,
       profilePicture: slackUserData.data.imageUrl,
       slackId: slackUserData.data.userId,
+      access_token: oauthRes.data.access_token,
     };
   }
 }

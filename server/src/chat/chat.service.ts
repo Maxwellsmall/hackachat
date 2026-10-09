@@ -1,8 +1,13 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { HttpClient } from '@nestjs/http-client';
 import { ChatResponseDto, ModelResponseDto, SendMessageDto } from './dto';
 import { AiService } from '../ai/ai.service';
 import { generateText } from 'ai';
+import { Request } from 'express';
 
 @Injectable()
 export class ChatService {
@@ -54,5 +59,28 @@ export class ChatService {
         outputToken: res.usage.outputTokens!,
       },
     };
+  }
+
+  async checkEligibility(req: Request) {
+    const hackclubUserData = await this.httpClient.get<{
+      identity: {
+        ysws_eligible: boolean;
+        id: string;
+        verification_status: boolean;
+        slack_id: string;
+      };
+    }>('https://auth.hackclub.com/api/v1/me', {
+      headers: {
+        Authorization: `Bearer ${req.headers.authorization}`,
+      },
+    });
+
+    if (
+      !hackclubUserData.data.identity.verification_status ||
+      !hackclubUserData.data.identity.ysws_eligible
+    )
+      throw new ForbiddenException(
+        "You are not eligible for Hackachat, it's either you haven't done your id verification, or your already pass 18",
+      );
   }
 }
