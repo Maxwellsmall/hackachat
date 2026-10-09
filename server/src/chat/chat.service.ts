@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { HttpClient } from '@nestjs/http-client';
-import { ModelResponseDto, SendMessageDto } from './dto';
+import { ChatResponseDto, ModelResponseDto, SendMessageDto } from './dto';
 import { AiService } from '../ai/ai.service';
 import { generateText } from 'ai';
 
@@ -24,24 +24,35 @@ export class ChatService {
     return modelRes.data;
   }
 
-  async sendMessage(sendMessageDto: SendMessageDto) {
+  async sendMessage(sendMessageDto: SendMessageDto): Promise<ChatResponseDto> {
     const res = await generateText({
+      instructions: [
+        this.aiService.getSystemPrompt(sendMessageDto.userData),
+        ...sendMessageDto.messages
+          .filter((m) => m.role === 'system')
+          .map((message) => ({
+            role: message.role as 'system',
+            content: message.content,
+          })),
+      ],
+
       model: this.aiService.hackclubAI(sendMessageDto.modelConfig.modelName),
       temperature: sendMessageDto.modelConfig.temperatureOrCreativity,
-      messages: sendMessageDto.messages.map((message) => ({
-        role: message.role,
-        content: message.content,
-      })),
+      messages: sendMessageDto.messages
+        .filter((m) => m.role !== 'system')
+        .map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
     });
 
-    // const res = await this.aiService.chat.send({
-    //   chatRequest: {
-    //     model: sendMessageDto.modelConfig.modelName,
-    //     messages:
-    //     stream: false,
-    //   },
-    // });
-
-    // console.log(res);
+    return {
+      reasoning: res.finishReason,
+      response: { role: 'assistant', content: res.text },
+      usage: {
+        inputToken: res.usage.inputTokens!,
+        outputToken: res.usage.outputTokens!,
+      },
+    };
   }
 }

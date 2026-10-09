@@ -52,11 +52,15 @@ class ChatResponseUsageDto {
   outputToken!: number;
 }
 
+class ChatResponseObjectDto {
+  role!: 'assistant';
+  content!: string;
+}
 export class ChatResponseDto {
   @ApiProperty({ type: ChatResponseDto })
   usage!: ChatResponseUsageDto;
   @ApiProperty({ type: 'string', nullable: true })
   reasoning!: string | null;
-  @ApiProperty()
-  response!: string;
+  @ApiProperty({ type: ChatResponseObjectDto })
+  response!: ChatResponseObjectDto;
 }
