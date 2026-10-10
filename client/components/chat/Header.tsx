@@ -1,7 +1,10 @@
 import React from 'react';
-import { PaneLeft, Plus, Settings, Home } from 'lucide-react'
+import { useState } from 'react';
+import { PanelLeft, Plus, Settings, Home } from 'lucide-react'
 import { Button } from '../ui/button';
-import { ModelPicker } from './ModelPicker';
+// import { ModelPicker } from './ModelPicker'
+
+const [onToggleSidebar, setOnTogglrSidebar] = useState()
 
 interface  ChatHeaderProps {
     title: string;
@@ -12,16 +15,7 @@ interface  ChatHeaderProps {
     onOpenSettings: () => void;
     onGoHome: () => void;
 }
-export const ChatHeader: React.FC<ChatHeaderProps> = ({
-   //  title,
-   //  currentModel,
-   //  onModelChange
-   //  onToggleSidebar,
-   //  onNewChat,
-   //  onOpenSettings,
-   //  onGoHome,
 
-})
 export default function Header(){
    return(
    <header className="flex h-12 w-full items-center justify-between border-b border-border bg-card/80 px-3 sm:px-4 backdrop-blur-xs select-none">
@@ -33,13 +27,12 @@ export default function Header(){
          className="h-8 w-8 text-muted-foreground hover:text-foreground"
          title="Toggle sidebar (⌘B)"
          >
-            <PaneLeft className="h-4 w-4" />
+            <PanelLeft className="h-4 w-4" />
         </Button>
 
         <Button
          variant="ghost"
          size="icon"
-         onClick={onGoHome}
          className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:inline-flex"
          title="Return to homepage"
          >
@@ -47,20 +40,20 @@ export default function Header(){
         </Button>
 
         <h1 className="text-xs sm:text-sm font-semibold truncate text-foreground">
-                { title || 'New Chat'}
+                New Chat
         </h1>
      </div>
 
      <div className="flex items-center gap-1.5 shrink-0">
-        <ModelPicker
+        {/* <ModelPicker
         currentModel={currentModel}
         onModelChange={onModelChange}
-        />
+        /> */}
 
         <Button 
         variant="ghost"
         size="icon"
-        onClick={onNewChat}
+        
         className="h-8 w-8 text-muted-foreground hover:text-foreground"
         title="New Chat (⌘K)"
         >
@@ -70,7 +63,7 @@ export default function Header(){
         <Button
         variant="ghost"
         size="icon"
-        onClick={onOpenSettings}
+        
         className="h-8 w-8 text-muted-foreground hover:text-foreground"
         title="Settings"
         >
