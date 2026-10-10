@@ -26,11 +26,10 @@ const Prompt = () => {
                                 [2, 5] 
                                 <ArrowRight className='w-4 h-4 text-zinc-500'/>    
                                 low=0, high=1, mid=0
-                                
+
                             </span>
                             <span className='text-zinc-500'>if target less than 5, high becomes 0</span> <br />
                             <span>
-                                  
                                 Next loop: mid=(0+0)//2 = 0 <ArrowRight className='w-4 h-4 text-zinc-500'/> stuck!
                             </span>
                         </div>
