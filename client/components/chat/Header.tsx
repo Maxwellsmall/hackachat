@@ -1,10 +1,11 @@
+"use client"
 import React from 'react';
 import { useState } from 'react';
 import { PanelLeft, Plus, Settings, Home } from 'lucide-react'
 import { Button } from '../ui/button';
 // import { ModelPicker } from './ModelPicker'
 
-const [onToggleSidebar, setOnTogglrSidebar] = useState()
+// const [onToggleSidebar, setOnToggleSidebar] = useState("")
 
 interface  ChatHeaderProps {
     title: string;
@@ -23,7 +24,7 @@ export default function Header(){
         <Button
          variant="ghost"
          size="icon"
-         onClick={onToggleSidebar}
+         // onClick={onToggleSidebar}
          className="h-8 w-8 text-muted-foreground hover:text-foreground"
          title="Toggle sidebar (⌘B)"
          >
