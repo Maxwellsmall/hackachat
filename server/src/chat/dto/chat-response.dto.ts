@@ -1,21 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 class ModelArchitectureDto {
-  @ApiProperty({})
+  @ApiProperty()
   modality!: string;
   @ApiProperty({ type: [String] })
   input_modalities!: string[];
   @ApiProperty({ type: [String] })
   output_modalities!: string[];
-  @ApiProperty({})
+  @ApiProperty()
   tokenizer!: string;
   @ApiProperty({ type: 'string', nullable: true })
   instruct_type!: string | null;
 }
 class ModelPricingDto {
-  @ApiProperty({})
+  @ApiProperty()
   prompt!: number;
-  @ApiProperty({})
+  @ApiProperty()
   completion!: number;
   @ApiProperty({ required: false })
   image_output?: number;
@@ -25,22 +25,44 @@ class ModelPricingDto {
   input_cache_read?: number;
 }
 export class ModelResponseDto {
-  @ApiProperty({})
+  @ApiProperty()
   id!: string;
-  @ApiProperty({})
+  @ApiProperty()
   canonical_slug!: string;
   @ApiProperty({ type: 'string', nullable: true })
   hugging_face_id!: string | null;
-  @ApiProperty({})
+  @ApiProperty()
   name!: string;
-  @ApiProperty({})
+  @ApiProperty()
   created!: number;
-  @ApiProperty({})
+  @ApiProperty()
   description!: string;
-  @ApiProperty({})
+  @ApiProperty()
   context_length!: number;
   @ApiProperty({ type: ModelArchitectureDto })
   architecture!: ModelArchitectureDto;
   @ApiProperty({ type: ModelPricingDto })
   pricing!: ModelPricingDto;
+}
+
+class ChatResponseUsageDto {
+  @ApiProperty()
+  inputToken!: number;
+  @ApiProperty()
+  outputToken!: number;
+}
+
+class ChatResponseObjectDto {
+  @ApiProperty({ default: 'assistance' })
+  role!: 'assistant';
+  @ApiProperty()
+  content!: string;
+}
+export class ChatResponseDto {
+  @ApiProperty({ type: ChatResponseUsageDto })
+  usage!: ChatResponseUsageDto;
+  @ApiProperty({ type: 'string', nullable: true })
+  reasoning!: string | null;
+  @ApiProperty({ type: ChatResponseObjectDto })
+  response!: ChatResponseObjectDto;
 }

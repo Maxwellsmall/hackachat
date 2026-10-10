@@ -58,8 +58,6 @@ export class AuthService {
         `Failed to exchange code for token: ${oauthRes.status} ${oauthRes.statusText}`,
       );
 
-    console.log(oauthRes.data);
-
     const hackclubUserData = await this.httpClient.get<{
       identity: {
         ysws_eligible: boolean;
@@ -72,14 +70,12 @@ export class AuthService {
     });
 
     if (
-      !hackclubUserData.data.identity.verification_status &&
+      !hackclubUserData.data.identity.verification_status ||
       !hackclubUserData.data.identity.ysws_eligible
     )
       throw new ForbiddenException(
         "You are not eligible for Hackachat, it's either you haven't done your id verification, or your already pass 18",
       );
-
-    console.log(hackclubUserData.data);
 
     const slackUserData = await this.httpClient.get<{
       displayName: string;
@@ -96,6 +92,7 @@ export class AuthService {
       name: slackUserData.data.displayName,
       profilePicture: slackUserData.data.imageUrl,
       slackId: slackUserData.data.userId,
+      access_token: oauthRes.data.access_token,
     };
   }
 }
