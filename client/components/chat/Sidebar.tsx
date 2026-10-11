@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 // import { Input } from '../ui/input';
 import {
     Plus,
-    search,
+    Search,
     MessageSquare,
-    Trah2,
-    edit2,
-    check,
-    x,
-    settings,
+    Trash2,
+    Edit2,
+    Check,
+    X,
+    Settings,
     } from 'lucide-react';
 
 // interface chatsidebarprobs {
@@ -41,8 +41,17 @@ import {
 
 export default function () {
     return (
-        <div>
-            
-        </div>
+        <aside className='flex h-full w-full  bg-card border-r border-border select-none'>
+          {/* top brand & newchat */}
+        <div className="p-3 border-b border-border space-y-2">
+          <div className="flex item-center justify-between">
+            <button
+
+              className="flex items-center gap-2.5 text-left group transition-opacity hover:opacity-80"
+              ></button>
+              </div>
+              </div>
+              </aside>
     )
+
 }

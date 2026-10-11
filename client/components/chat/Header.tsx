@@ -5,7 +5,6 @@ import { PanelLeft, Plus, Settings, Home } from 'lucide-react'
 import { Button } from '../ui/button';
 // import { ModelPicker } from './ModelPicker'
 
-// const [onToggleSidebar, setOnToggleSidebar] = useState("")
 
 interface  ChatHeaderProps {
     title: string;
@@ -18,13 +17,15 @@ interface  ChatHeaderProps {
 }
 
 export default function Header(){
+   const [onToggleSidebar, setOnToggleSidebar] = useState(false)
+
    return(
    <header className="flex h-12 w-full items-center justify-between border-b border-border bg-card/80 px-3 sm:px-4 backdrop-blur-xs select-none">
      <div className="flex items-center gap-2 truncate flex-1 mr-2">
         <Button
          variant="ghost"
          size="icon"
-         // onClick={onToggleSidebar}
+         onClick={() => {onToggleSidebar && setOnToggleSidebar(!onToggleSidebar)}}
          className="h-8 w-8 text-muted-foreground hover:text-foreground"
          title="Toggle sidebar (⌘B)"
          >
@@ -40,7 +41,7 @@ export default function Header(){
             <Home className="h-4 w-4" />
         </Button>
 
-        <h1 className="text-xs sm:text-sm font-semibold truncate text-foreground">
+        <h1 className="text-xs sm:text-sm font-semibold truncate text-foreground font">
                 New Chat
         </h1>
      </div>
