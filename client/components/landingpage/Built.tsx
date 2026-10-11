@@ -4,26 +4,42 @@ import Card from "@/components/landing/card"
 const CardProps = [
 
   {
+    id: 1,
     title: "Pinpoints bugs without hand-waving",
     subtitle: `Paste Terminal logs, cryptic compliers, or CSS flexbox disaster.
               Hackachat steps through the execution stacks points out exact lines
               where state went out of sync, and gives syntax-highlighted solutions.
     `,
     headText: "Real Code Understanding",
-    footerText: "come here now"
+    footerText: "come here now",
+    size: "large"
   },
   {
+    id: 2,
     title: "Hint before answers",
     subtitle: `Paste Terminal logs, cryptic compliers, or CSS flexbox disaster.
               Hackachat steps`,
     headText: "PEDAGOGY FIRST",
-    footerText: "come here now"
+    footerText: "come here now",
+    size: "normal"
   },
   {
+    id: 3,
     title: "A lady is here",
     subtitle: "parargraph",
     headText: "hello world",
-    footerText: "come here now"
+    footerText: "come here now",
+    size: "normal"
+
+  },
+   {
+    id: 4,
+    title: "A lady is here",
+    subtitle: "parargraph",
+    headText: "hello world",
+    footerText: "come here now",
+    size: "large"
+    
   }
 ]
 
@@ -40,10 +56,13 @@ const Built = () => {
            </p> 
 
            <div className='grid grid-cols-2 my-10 items-center justify-center gap-5 w-full'>
-            {CardProps.map((item) => (
-                <div className=''>
-                  <Card title={item.title} subtitle={item.subtitle} headText={item.headText} footerText={item.footerText}/>
-                </div>
+            {CardProps.map((card) => (
+                  <Card 
+                  key={card.id}
+                   title={card.title} 
+                   subtitle={card.subtitle} 
+                   headText={card.headText} 
+                   footerText={card.footerText}/>
             ))}
            </div>
 
