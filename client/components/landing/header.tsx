@@ -75,7 +75,7 @@ const Header = () => {
                     }
                 </Button>
                     <Button>
-                        <span>Open Chat</span>
+                        <Link href={"/chat"}>Open Chat</Link>
                         <ArrowRight className="w-3.5 h-3.5"/>
                     </Button>
             </div>
