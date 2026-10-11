@@ -46,7 +46,13 @@ export default function () {
             className="h-7 pl-8 pr-2 text-xs bg-muted/40 border-border"
           />
         </div>
-
+        </div>
+        <div className="mx-5 p-2 flex justify-center items-center bg-zinc-300 rounded-md mt-7 gap-3">
+            <MessageSquare />
+            <div className="w-full ">
+                <p className="text-bold text-xs">New Chat</p>
+                <span className="text-[10px] -mt-1.25">Just Now</span>
+            </div>
         </div>
       </div>
     </aside>
