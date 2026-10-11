@@ -10,15 +10,17 @@ const CardProps = [
               Hackachat steps through the execution stacks points out exact lines
               where state went out of sync, and gives syntax-highlighted solutions.
     `,
-    headText: "Real Code Understanding",
+    headText: "REAL CODE UNDERSTANDING",
     footerText: "come here now",
     size: "large"
   },
   {
     id: 2,
     title: "Hint before answers",
-    subtitle: `Paste Terminal logs, cryptic compliers, or CSS flexbox disaster.
-              Hackachat steps`,
+    subtitle: `When you're stuck on calculus, AP chemistry, or essay structure, 
+                Hackachat asks guiding questions and explains the intuition behind 
+                the formula so it actually clicks.
+               `,
     headText: "PEDAGOGY FIRST",
     footerText: "come here now",
     size: "normal"
@@ -55,14 +57,20 @@ const Built = () => {
            to you. Hackachat is tuned for learning by building. 
            </p> 
 
-           <div className='grid grid-cols-2 my-10 items-center justify-center gap-5 w-full'>
+           <div className='grid grid-cols-3 my-10 items-center justify-center gap-5 w-full'>
             {CardProps.map((card) => (
                   <Card 
-                  key={card.id}
+                    key={card.id}
                    title={card.title} 
                    subtitle={card.subtitle} 
                    headText={card.headText} 
-                   footerText={card.footerText}/>
+                   footerText={card.footerText}
+                   className={
+                    card.size === "large"
+                    ? "col-span-2"
+                    : "col-span-1"
+                  }
+                   />
             ))}
            </div>
 
