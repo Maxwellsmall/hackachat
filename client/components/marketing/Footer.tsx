@@ -1,5 +1,6 @@
 import React from 'react';
 import { GitBranch, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
     return (
@@ -21,33 +22,27 @@ export default function Footer() {
                     </div>
 
                     <div className="flex items-center gap-4 text-xs font-medium text-muted-forground">
-                        <a
-                        // href={SITE_COPY.brand.githubUrl}
-                        target="_blank"
-                        rel="noreferrer noopener"
+                        <Link
+                        href={"https://github.com/mumuniazeez/hackachat"}
                         className="flex items-center gap-1 hover:text-foreground transition-colors"
                         >
                             <GitBranch className="h-3.5 w-3.5" />
                             <span>GitHub</span>
-                        </a>
-                        <a
-                        // href={SITE_COPY.brand.thirdspaceUrl}
-                        target="_blank"
-                        rel="noreferrer noopener"
+                        </Link>
+                        <Link
+                        href={"https://github.com/mumuniazeez/hackachat"}
                         className="flex items-center gap-1 hover:text-foreground transition-colors"
                         >
                         <span>Third Space</span>
                         <ExternalLink className="h-3 w-3" />    
-                        </a>
-                        <a
-                        // href={SITE_COPY.brand.hackclubUrl}
-                        target="_blank"
-                        rel="noreferrer noopener"
+                        </Link>
+                        <Link
+                        href={""}
                         className="flex items-center gap-1 hover:text-foreground transition-colors"
                         >
                             <span>Hack Club</span>
                             <ExternalLink className="h-3 w-3" />
-                        </a>                
+                        </Link>                
                     </div>
                 </div>
 
