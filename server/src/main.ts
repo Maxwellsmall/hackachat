@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   app.enableCors();
 
   app.useGlobalPipes(
@@ -20,6 +21,7 @@ async function bootstrap() {
     .setDescription('API documentation for Hackachat')
     .setVersion('1.0')
     .addServer(process.env.APP_URL!)
+    .addBearerAuth()
     .build();
 
   const documentFactory = () =>
@@ -27,6 +29,6 @@ async function bootstrap() {
 
   SwaggerModule.setup('docs', app, documentFactory);
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 4000);
 }
 void bootstrap();

@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ChatService } from './chat.service';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { ModelResponseDto, SendMessageDto } from './dto';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ChatResponseDto, ModelResponseDto, SendMessageDto } from './dto';
+import { type Request } from 'express';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller('chat')
 export class ChatController {
@@ -17,8 +19,20 @@ export class ChatController {
     return this.chatService.getModels();
   }
 
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Send a message',
+    description: 'Chat with the ai assistance',
+  })
+  @ApiResponse({ status: 200, type: ChatResponseDto })
+  @Throttle({ minutes: { limit: 20, ttl: 60000, blockDuration: 60000 } })
+  @Throttle({ day: { limit: 250, ttl: 86400000, blockDuration: 86400000 } })
   @Post('/send')
-  sendMessage(@Body() sendMessageDto: SendMessageDto) {
+  async sendMessage(
+    @Body() sendMessageDto: SendMessageDto,
+    @Req() req: Request,
+  ) {
+    await this.chatService.checkEligibility(req);
     return this.chatService.sendMessage(sendMessageDto);
   }
 }

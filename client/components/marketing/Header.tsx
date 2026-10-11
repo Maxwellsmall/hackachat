@@ -63,7 +63,7 @@ const Header = () => {
                     >
                         <Link href="/privacy">privacy</Link>
                 </p>
-                <Button onClick={() => setDarkMode(!darkMode)} className="bg-transparent text-zinc-900 !hover-none">
+                <Button onClick={() => setDarkMode(!darkMode)} className="hover:bg-transparent bg-white/15 text-zinc-900">
                     {darkMode
 
                     ? (

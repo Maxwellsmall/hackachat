@@ -1,8 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { HttpClient } from '@nestjs/http-client';
-import { ModelResponseDto, SendMessageDto } from './dto';
+import { ChatResponseDto, ModelResponseDto, SendMessageDto } from './dto';
 import { AiService } from '../ai/ai.service';
 import { generateText } from 'ai';
+import { Request } from 'express';
 
 @Injectable()
 export class ChatService {
@@ -24,24 +30,59 @@ export class ChatService {
     return modelRes.data;
   }
 
-  async sendMessage(sendMessageDto: SendMessageDto) {
+  async sendMessage(sendMessageDto: SendMessageDto): Promise<ChatResponseDto> {
     const res = await generateText({
+      instructions: [
+        this.aiService.getSystemPrompt(sendMessageDto.userData),
+        ...sendMessageDto.messages
+          .filter((m) => m.role === 'system')
+          .map((message) => ({
+            role: message.role as 'system',
+            content: message.content,
+          })),
+      ],
+
       model: this.aiService.hackclubAI(sendMessageDto.modelConfig.modelName),
       temperature: sendMessageDto.modelConfig.temperatureOrCreativity,
-      messages: sendMessageDto.messages.map((message) => ({
-        role: message.role,
-        content: message.content,
-      })),
+      messages: sendMessageDto.messages
+        .filter((m) => m.role !== 'system')
+        .map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
     });
 
-    // const res = await this.aiService.chat.send({
-    //   chatRequest: {
-    //     model: sendMessageDto.modelConfig.modelName,
-    //     messages:
-    //     stream: false,
-    //   },
-    // });
+    return {
+      reasoning: res.finishReason,
+      response: { role: 'assistant', content: res.text },
+      usage: {
+        inputToken: res.usage.inputTokens!,
+        outputToken: res.usage.outputTokens!,
+      },
+    };
+  }
 
-    // console.log(res);
+  async checkEligibility(req: Request) {
+    if (!req.headers.authorization) throw new UnauthorizedException();
+    const hackclubUserData = await this.httpClient.get<{
+      identity: {
+        ysws_eligible: boolean;
+        id: string;
+        verification_status: boolean;
+        slack_id: string;
+      };
+    }>('https://auth.hackclub.com/api/v1/me', {
+      headers: {
+        Authorization: `${req.headers.authorization || (req.headers['Authorization'] as string)}`,
+      },
+    });
+
+    if (
+      !hackclubUserData.data.identity.verification_status ||
+      !hackclubUserData.data.identity.ysws_eligible
+    )
+      throw new ForbiddenException(
+        "You are not eligible for Hackachat, it's either you haven't done your id verification, or your already pass 18",
+      );
   }
 }

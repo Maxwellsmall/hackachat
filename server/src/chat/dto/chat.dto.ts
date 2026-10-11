@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsEnum,
   IsNumber,
   IsObject,
@@ -19,6 +20,7 @@ enum MessageRole {
   assistant = 'assistant',
 }
 
+type MessageRoleValues = `${MessageRole}`;
 export class UserDataDto {
   @ApiProperty()
   @IsString()
@@ -47,7 +49,7 @@ export class ModelConfigDto {
 export class MessageDto {
   @ApiProperty({ enum: MessageRole })
   @IsEnum(MessageRole)
-  role!: MessageRole;
+  role!: MessageRoleValues;
 
   @ApiProperty()
   @IsString()
@@ -68,5 +70,6 @@ export class SendMessageDto {
   @ApiProperty({ type: [MessageDto] })
   @Type(() => MessageDto)
   @IsObject({ each: true })
+  @IsArray()
   messages!: MessageDto[];
 }
