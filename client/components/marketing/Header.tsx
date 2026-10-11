@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <>
       <div className="sticky-top top-0 z-40 w-full border-b border-zinc-200/70 bg-[#FAFAFA]/90 backdrop-blur-md">
-        <div className="flex justify-between items-center px-10 py-5">
+        <div className="flex justify-between items-center px-50 py-5">
           <div className="flex justify-between items-center">
             <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white shadow-xs group-hover: bg-zinc-800 transition-colors">
               <svg

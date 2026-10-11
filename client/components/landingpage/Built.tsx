@@ -1,8 +1,7 @@
-import React from 'react'
-import Card from "@/components/landing/card"
+import React from "react";
+import Card from "@/components/landing/card";
 
 const CardProps = [
-
   {
     id: 1,
     title: "Pinpoints bugs without hand-waving",
@@ -12,7 +11,7 @@ const CardProps = [
     `,
     headText: "REAL CODE UNDERSTANDING",
     footerText: "come here now",
-    size: "large"
+    size: "large",
   },
   {
     id: 2,
@@ -23,7 +22,7 @@ const CardProps = [
                `,
     headText: "PEDAGOGY FIRST",
     footerText: "come here now",
-    size: "normal"
+    size: "normal",
   },
   {
     id: 3,
@@ -31,52 +30,47 @@ const CardProps = [
     subtitle: "parargraph",
     headText: "hello world",
     footerText: "come here now",
-    size: "normal"
-
+    size: "normal",
   },
-   {
+  {
     id: 4,
     title: "A lady is here",
     subtitle: "parargraph",
     headText: "hello world",
     footerText: "come here now",
-    size: "large"
-    
-  }
-]
-
+    size: "large",
+  },
+];
 
 const Built = () => {
   return (
-    <div className='w-full px-5'>
-        <div className='py-10'>
-          <h1 className='font-semibold text-[35px]'>A peer at the next desk, not a corporate <br />
+    <div className="w-full px-50 border border-zinc-200/70">
+      <div className="py-10">
+        <h1 className="font-semibold text-[35px]">
+          A peer at the next desk, not a corporate <br />
           bot.
-          </h1>
-          <p className='text-zinc-500 text-[15px]'>Most chatbots either blurt out homeworks answer(so you fail the test later) or talk down <br />
-           to you. Hackachat is tuned for learning by building. 
-           </p> 
+        </h1>
+        <p className="text-zinc-500 text-[15px]">
+          Most chatbots either blurt out homeworks answer(so you fail the test
+          later) or talk down <br />
+          to you. Hackachat is tuned for learning by building.
+        </p>
 
-           <div className='grid grid-cols-3 my-10 items-center justify-center gap-5 w-full'>
-            {CardProps.map((card) => (
-                  <Card 
-                    key={card.id}
-                   title={card.title} 
-                   subtitle={card.subtitle} 
-                   headText={card.headText} 
-                   footerText={card.footerText}
-                   className={
-                    card.size === "large"
-                    ? "col-span-2"
-                    : "col-span-1"
-                  }
-                   />
-            ))}
-           </div>
-
+        <div className="grid grid-cols-2 my-10 items-center justify-center gap-5 w-full">
+          {CardProps.map((card) => (
+            <Card
+              className=""
+              key={card.id}
+              title={card.title}
+              subtitle={card.subtitle}
+              headText={card.headText}
+              footerText={card.footerText}
+            />
+          ))}
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Built
+export default Built;
