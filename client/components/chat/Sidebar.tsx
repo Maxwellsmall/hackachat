@@ -1,57 +1,50 @@
-import React, { useState } from 'react';
-// import { ChatSession } from '../types/chat';
-// import { Button } from '../ui/button';
-// import { Input } from '../ui/input';
+"use client"
+import React, { useState } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
-    Plus,
-    Search,
-    MessageSquare,
-    Trash2,
-    Edit2,
-    Check,
-    X,
-    Settings,
-    } from 'lucide-react';
-
-// interface chatsidebarprobs {
-//     chats: chatsession [];
-//     activechatid?: string;
-//     onselectchat: (id: string) => void;
-//     onnewchat: () => void;
-//     ondeletechat: (id: string) => void;
-//     onrenamechat: (id: string, newtitle: string) => void;
-//     onopensettings: () => void;
-//     ongohome: () => void;
-// }
-
-// export const chatsidebar: React.fc<chatsidebarprobs> = ({
-//     chats,
-//     activechatid,
-//     onselectchat,
-//     onNewchat,
-//     ondeletechat,
-//     onrenamechat,
-//     onopensettings,
-//     ongohome,
-// }) => {
-//     const [search, setsearch] = usestate('');
-//     const [editingid, seteditingid] = useState,string
-// )
+  Plus,
+  Search,
+  MessageSquare,
+  Trash2,
+  Edit2,
+  Check,
+  X,
+  Settings,
+} from "lucide-react";
 
 
 export default function () {
-    return (
-        <aside className='flex h-full w-full  bg-card border-r border-border select-none'>
-          {/* top brand & newchat */}
-        <div className="p-3 border-b border-border space-y-2">
-          <div className="flex item-center justify-between">
-            <button
+    const [ search, setSearch] = useState("")
+  return (
+    <aside className="flex h-full w-full  bg-card border-r border-border select-none">
+      {/* top brand & newchat */}
+      <div className="p-3 border-b border-border space-y-2">
+        <div className="flex item-center justify-between">
+          <div className="flex items-center gap-2.5 bg-">
+            <div className="flex h-7 items-center justify-center rounded-md bg-primary text-primary-foreground font-mono font-bold text-xs border border-primary p-3">H</div>
+          <div className="leading-tight">
+            <span className="font-display font-semibold text-sm tracking-tight text-ackground block ">Hackachat</span>
+          <span className="text-[10px] text-muted-foreground block">Third Space</span>
+          </div>
 
-              className="flex items-center gap-2.5 text-left group transition-opacity hover:opacity-80"
-              ></button>
-              </div>
-              </div>
-              </aside>
-    )
 
+          </div>
+        </div>  
+          <Button className="w-60 text-left"> + New Chat</Button>
+      </div>
+      <div className="px-3 pt-2 pb-1">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-muted-foreground" />
+          <Input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search conversations..."
+            className="h-7 pl-8 pr-2 text-xs bg-muted/40 border-border"
+          />
+        </div>
+      </div>
+    </aside>
+  );
 }
+ 
