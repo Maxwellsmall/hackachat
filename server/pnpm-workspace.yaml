@@ -1,5 +1,0 @@
-allowBuilds:
-  '@openrouter/sdk': true
-  '@parcel/watcher': true
-  '@scarf/scarf': true
-  unrs-resolver: true
