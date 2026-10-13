@@ -36,23 +36,30 @@ export default function () {
         </div>
         <Button className="w-60 text-left"> + New Chat</Button>
       </div>
-      <div className="px-3 pt-2 pb-1">
+      <div className="px-3 pt-3 pb-1">
         <div className="relative">
           <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-muted-foreground" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search conversations..."
-            className="h-7 pl-8 pr-2 text-xs bg-muted/40 border-border"
+            className="h-8 pl-8 pr-2  text-xs bg-muted/40 border-border "
           />
         </div>
         </div>
-        <div className="mx-5 p-2 flex justify-center items-center bg-zinc-300 rounded-md mt-7 gap-3">
-            <MessageSquare />
-            <div className="w-full ">
-                <p className="text-bold text-xs">New Chat</p>
-                <span className="text-[10px] -mt-1.25">Just Now</span>
+        <div className="mx-3 p-2 flex bg-muted/40  border rounded-md mt-2 gap-3">
+            <MessageSquare className="text-zinc-400"/>
+            <div className="w-full pointer">
+                <p className="text-bold text-xs -mb-2.5">New Chat</p>
+                <span className="text-[10px] text-zinc-700">Just Now</span>
             </div>
+        </div>
+        <div className="">
+          <div className="relative">
+            <div className="absolute bottom">
+              
+            </div>
+          </div>
         </div>
       </div>
     </aside>
