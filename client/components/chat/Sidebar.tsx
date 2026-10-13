@@ -16,12 +16,11 @@ import {
 export default function () {
   const [search, setSearch] = useState("");
   return (
-    <aside className="flex h-full w-full  bg-card border-r border-border select-none">
-        <div className="border-r h-screen overflow-y-hidden">
-      <div className="p-3 border-b border-border space-y-2">
+    <aside className="flex flex-col h-full w-full bg-card border-r border-border select-none">
+        <div className="p-3 border-b border-border space-y-hidden shrink-0">
         <div className="flex item-center justify-between">
           <div className="flex items-center gap-2.5 bg-">
-            <div className="flex h-7 items-center justify-center rounded-md bg-primary text-primary-foreground font-mono font-bold text-xs border border-primary p-3">
+            <div className="rounded-md bg-primary text-primary-foreground font-mono font-bold text-xs border border-primary p-2 px-3">
               H
             </div>
             <div className="leading-tight">
@@ -34,7 +33,7 @@ export default function () {
             </div>
           </div>
         </div>
-        <Button className="w-60 text-left"> + New Chat</Button>
+        <Button className="w-full text-left"> + New Chat</Button>
       </div>
       <div className="px-3 pt-3 pb-1">
         <div className="relative">
@@ -46,21 +45,21 @@ export default function () {
             className="h-8 pl-8 pr-2  text-xs bg-muted/40 border-border "
           />
         </div>
-        </div>
-        <div className="mx-3 p-2 flex bg-muted/40  border rounded-md mt-2 gap-3">
-            <MessageSquare className="text-zinc-400"/>
-            <div className="w-full pointer">
-                <p className="text-bold text-xs -mb-2.5">New Chat</p>
-                <span className="text-[10px] text-zinc-700">Just Now</span>
-            </div>
-        </div>
-        <div className="">
-          <div className="relative">
-            <div className="absolute bottom">
-              
-            </div>
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          <div className="mx-3 p-2 flex bg-muted/40  border rounded-md mt-2 gap-3 h-full">
+              <MessageSquare className="text-zinc-400"/>
+              <div className="w-full pointer">
+                  <p className="text-bold text-xs -mb-2.5">New Chat</p>
+                  <span className="text-[10px] text-zinc-700">Just Now</span>
+              </div>
           </div>
-        </div>
+</div>
+          </div>
+        <div className="mt-auto p-3 border-border">
+              <Button className="bg-muted/40 border hover:bg-zinc-500 flex justify-center items-center text-black">
+              <span className="bg-black text-white p-2 px-3 font-bold text-xs rounded-md">H</span>
+              Sign in with Hack Club
+              </Button>
       </div>
     </aside>
   );
