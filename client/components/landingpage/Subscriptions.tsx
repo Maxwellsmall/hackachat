@@ -2,9 +2,36 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import SubCard from "../landing/subCard";
+
 
 const Subscriptions = () => {
+
+const cardData = [
+  {
+    title: "Hack Club AI Proxy",
+    subtitle: `Hackclub provides free upstream API compute (ai.hackclub.com) 
+                to high school coders. They run an OPenAi-compatible Proxy wth 
+                leading models`,
+    icon: <ArrowDown className="w-4 h-4"/>
+  },
+   {
+    title: "Built by teenagers",
+    subtitle: `Two of our contributors are begginers learning frontend development.
+                The code is structured cleanly with small components. 
+                typed schemas and zero convoluted boilerplate and so students can read and modify`,
+    icon: <ArrowDown className="w-4 h-4"/>
+  },
+   {
+    title: "Open source and reproducible",
+    subtitle: `Everything you see is open source. You can run the fast API backend.
+               spin up the web app. connect your own proxy key, or host it for your
+                own high school club`,
+    icon: <ArrowDown className="w-4 h-4"/>
+  },
+]
+
   return (
     <section className="px-7 py-5 flex flex-col w-full">
       <div className="w-full ">
@@ -21,29 +48,18 @@ const Subscriptions = () => {
             jams without hitting paywalls.
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row items-center justify-start gap-3.5 mt-8 px-5">
-          <Button>
-            <span>Start chatting now</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-          <Button variant={"secondary"}>
-            <span>Try the live demo below</span>
-          </Button>
-        </div>
-        <div className="flex items-center justify-start mb-7 mt-2 px-5 gap-2">
-          <div className="flex items-center justify-center gap-2">
-            <ArrowDown className="w-4 h-4 text-zinc-400" />
-            <span className="text-zinc-400 text-[15px]">No credit card</span>
+          <div className="w-full px-5 grid grid-cols-3 gap-4 my-7">
+            {
+            cardData.map((card, index) => (
+              <SubCard 
+                key={index}
+                title={card.title}
+                subtitle={card.subtitle}
+                icon={card.icon}
+              />
+            ))
+          }
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <ArrowDown className="w-4 h-4 text-zinc-400" />
-            <span className="text-zinc-400 text-[15px]">No account needed</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <ArrowDown className="w-4 h-4 text-zinc-400" />
-            <span className="text-zinc-400 text-[15px]">Stored on device</span>
-          </div>
-        </div>
       </div>
     </section>
   );
