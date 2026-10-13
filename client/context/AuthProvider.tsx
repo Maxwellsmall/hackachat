@@ -30,7 +30,7 @@ export default function AuthProvider({
   useEffect(() => {
     const load = async () => {
       const data = localStorage.getItem("userData");
-      if (!data) router.push("/");
+      if (!data) router.push("/auth");
       else {
         setUser(JSON.parse(data));
         setIsLoading(false);

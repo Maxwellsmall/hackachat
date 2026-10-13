@@ -18,6 +18,7 @@ function AuthPage() {
       setIsLoading(true);
       localStorage.setItem("authLoading", "true");
       if (!code) {
+        localStorage.removeItem("authLoading");
         window.location.replace(
           `${process.env.NEXT_PUBLIC_API_URL as string}/api/auth/hackclubauth?redirect_uri=${window.location.href}`,
         );
