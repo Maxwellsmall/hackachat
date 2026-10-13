@@ -13,7 +13,7 @@ export class ChatController {
     summary: 'Get all models',
     description: 'Get all models from Hackclub ai proxy',
   })
-  @ApiResponse({ status: 200, type: ModelResponseDto })
+  @ApiResponse({ status: 200, type: [ModelResponseDto] })
   @Get('/models')
   getModels() {
     return this.chatService.getModels();

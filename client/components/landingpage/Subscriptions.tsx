@@ -6,7 +6,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 
 const Subscriptions = () => {
   return (
-    <section className="px-50 py-20 border-y  flex flex-col w-full">
+    <section className="md:px-50 px-10 py-20 border-y flex flex-col w-full">
       <div className="w-full">
         <div className="max-w-6xl sm:px-6 text-left">
           <div className="inline-flex items-center space-x-2 px-3 rounded-md bg-white py-2 border border-zinc-200/80 text-xs font-medium mb-6 animate-in fade-in slide-in-from-bottom-2 duration-200">

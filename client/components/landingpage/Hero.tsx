@@ -7,7 +7,7 @@ import Prompt from "./Prompt";
 
 const Hero = () => {
   return (
-    <section className="px-50 py-20 flex">
+    <section className="md:px-50 px-10 py-20 flex md:flex-row flex-col gap-10">
       <div className="w-full">
         <div className="max-w-6xl sm:px-6 text-left">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-white py-2 border border-zinc-200/80 text-xs font-medium mb-6 animate-in fade-in slide-in-from-bottom-2 duration-200">

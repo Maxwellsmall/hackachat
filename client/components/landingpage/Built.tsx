@@ -57,19 +57,18 @@ const CardProps = [
 
 const Built = () => {
   return (
-    <div className="w-full px-50 py-20  border border-zinc-200 my-10">
+    <div className="w-full md:px-50 px-10 py-20  border border-zinc-200 my-10">
       <div className="py-7">
         <h1 className="font-semibold text-[35px]">
-          A peer at the next desk, not a corporate <br />
-          bot.
+          A peer at the next desk, not a corporate bot.
         </h1>
         <p className="text-zinc-500 text-[15px]">
-          Most chatbots either blurt out homeworks answer(so you fail the test
-          later) or talk down <br />
-          to you. Hackachat is tuned for learning by building.
+          Most chatbot either blurt out homeworks answer(so you fail the test
+          later) or talk down to you. Hackachat is tuned for learning by
+          building.
         </p>
 
-        <div className="grid grid-cols-7 my-10 items-center justify-center gap-5 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 my-10 items-center justify-center gap-5 w-full">
           {CardProps.map((card) => {
             let footerStyles = "py-1";
 

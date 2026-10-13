@@ -1,4 +1,6 @@
+import * as api from "@/lib/api";
 import { AuthResponseDto } from "@/lib/api";
+import { useModelStore } from "@/stores/modelStore";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -23,18 +25,25 @@ export default function AuthProvider({
   const router = useRouter();
   const [user, setUser] = useState<AuthResponseDto | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { setModels } = useModelStore();
 
   useEffect(() => {
-    const load = () => {
+    const load = async () => {
       const data = localStorage.getItem("userData");
       if (!data) router.push("/");
       else {
         setUser(JSON.parse(data));
         setIsLoading(false);
       }
+
+      const res = await api.chat.chatControllerGetModels({});
+      if (res.data) {
+        setModels(res.data);
+        console.log(res.data);
+      }
     };
     load();
-  }, [router]);
+  }, [router, setModels]);
 
   return !isLoading ? (
     <AuthContext.Provider value={{ user, setUser }}>
