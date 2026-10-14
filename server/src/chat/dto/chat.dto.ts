@@ -20,6 +20,13 @@ enum MessageRole {
   assistant = 'assistant',
 }
 
+enum MessageContentType {
+  text = 'text',
+  image = 'image',
+}
+
+type MessageContentTypeValues = `${MessageContentType}`;
+
 type MessageRoleValues = `${MessageRole}`;
 export class UserDataDto {
   @ApiProperty()
@@ -44,6 +51,10 @@ export class ModelConfigDto {
   @ApiProperty({ enum: ResponseDetailLevel })
   @IsEnum(ResponseDetailLevel)
   responseDetailLevel!: ResponseDetailLevel;
+}
+
+export class MessageContentDto {
+  type!: MessageContentTypeValues;
 }
 
 export class MessageDto {

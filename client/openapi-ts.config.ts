@@ -2,7 +2,7 @@ import { defineConfig } from "@hey-api/openapi-ts";
 import "dotenv/config";
 
 export default defineConfig({
-  input: `${process.env.VITE_API_URL}/docs-json`,
+  input: `${process.env.NEXT_PUBLIC_API_URL}/docs-json`,
   output: "./lib/api",
   plugins: [
     "@hey-api/typescript",

@@ -52,6 +52,8 @@ export class ChatService {
         })),
     });
 
+    // generateText({messages: [{content: [{type}]}]})
+
     return {
       reasoning: res.finishReason,
       response: { role: 'assistant', content: res.text },
