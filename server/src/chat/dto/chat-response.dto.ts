@@ -52,11 +52,16 @@ class ChatResponseUsageDto {
   outputToken!: number;
 }
 
+export class MessageContentTextDto {
+  type!: 'text';
+  text!: string;
+}
+
 class ChatResponseObjectDto {
   @ApiProperty({ default: 'assistance' })
   role!: 'assistant';
   @ApiProperty()
-  content!: string;
+  content!: MessageContentTextDto;
 }
 export class ChatResponseDto {
   @ApiProperty({ type: ChatResponseUsageDto })

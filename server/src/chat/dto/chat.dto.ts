@@ -9,25 +9,19 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+
 enum ResponseDetailLevel {
   short = 'short',
   balanced = 'balanced',
   detailed = 'detailed',
 }
 enum MessageRole {
-  system = 'system',
   user = 'user',
   assistant = 'assistant',
 }
 
-enum MessageContentType {
-  text = 'text',
-  image = 'image',
-}
-
-type MessageContentTypeValues = `${MessageContentType}`;
-
 type MessageRoleValues = `${MessageRole}`;
+
 export class UserDataDto {
   @ApiProperty()
   @IsString()
@@ -53,8 +47,14 @@ export class ModelConfigDto {
   responseDetailLevel!: ResponseDetailLevel;
 }
 
-export class MessageContentDto {
-  type!: MessageContentTypeValues;
+export class MessageContentImageDto {
+  type!: 'file';
+  data!: URL;
+  mediaType!: string;
+}
+export class MessageContentTextDto {
+  type!: 'text';
+  text!: string;
 }
 
 export class MessageDto {
@@ -64,7 +64,7 @@ export class MessageDto {
 
   @ApiProperty()
   @IsString()
-  content!: string;
+  content!: (MessageContentImageDto | MessageContentTextDto)[];
 }
 
 export class SendMessageDto {
