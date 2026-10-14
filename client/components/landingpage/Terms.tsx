@@ -3,59 +3,65 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
-import SubCard from "../landing/subCard";
+import TermsCard from "../landingpage/TermsCard";
 
 
 const Terms = () => {
 
-const cardData = [
+const termscardData = [
   {
-    title: "Hack Club AI Proxy",
-    subtitle: `Hackclub provides free upstream API compute (ai.hackclub.com) 
-                to high school coders. They run an OPenAi-compatible Proxy wth 
-                leading models`,
+    headText: "What lives on your device",
+    subtitle: `All your chat logs, custom instructions, and settings are 
+               saved locally in your browser storage. If you clear your 
+               browser data or switch devices, chats won’t follow you unless
+               you export them.`,
     icon: <ArrowDown className="w-4 h-4"/>
   },
    {
-    title: "Built by teenagers",
-    subtitle: `Two of our contributors are begginers learning frontend development.
-                The code is structured cleanly with small components. 
-                typed schemas and zero convoluted boilerplate and so students can read and modify`,
+    headText: "What goes through the API",
+    subtitle: `When you send a message, it is forwarded through our backend server to Hack Club
+              AI (ai.hackclub.com). To keep the free tier safe from automated spam and abuse, 
+              requests are logged upstream for abuse prevention.`,
     icon: <ArrowDown className="w-4 h-4"/>
   },
-   {
-    title: "Open source and reproducible",
-    subtitle: `Everything you see is open source. You can run the fast API backend.
-               spin up the web app. connect your own proxy key, or host it for your
-                own high school club`,
-    icon: <ArrowDown className="w-4 h-4"/>
-  },
+  
+  {
+   headText: "Fair rate limits",
+   subtitle: `Because this service is run for free by a non-profit student community, 
+              we limit usage to 20 messages per minute and 250 messages per day per 
+              client. This keeps it fair for everyone.`,
+   icon: <ArrowDown className="w-4 h-4"/>
+ },
+ {
+   headText: "Models can be wrong",
+   subtitle: `Language models hallucinate and make subtle logic errors. Always double-check
+              critical formulas, syntax, or facts before submitting homework or shipping 
+              code.`,
+   icon: <ArrowDown className="w-4 h-4"/>
+ },
 ]
-
   return (
     <section className="px-7 py-5 flex flex-col w-full">
       <div className="w-full ">
         <div className="max-w-6xl sm:px-6 text-left">
           <div className="inline-flex items-center space-x-2 px-3 rounded-md bg-white py-2 border border-zinc-200/80 text-xs font-medium mb-6 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <span> NO SUBSCRIPTION OR VC MONEY</span>
+            <span> NO SNEAKY TERMS</span>
           </div>
           <h1 className="font-bold text-[40px]">
-            Why is this free? Who runs it?
+           An honest look at privacy & limits
           </h1>
           <p className="text-zinc-500 mt-5 text-[20px]">
-          Hackachat was started by a team of teenagers inside Hack Club’s Third Space.
-           We wanted an AI tool we could use for school, coding clubs, and weekend game
-            jams without hitting paywalls.
+          Most Privacy policies hide behind twenty pages of jargon. Here is how Hackachat actually works with your data, plain and simple.
           </p>
         </div>
-          <div className="w-full px-5 grid grid-cols-3 gap-4 my-7">
+          <div className="w-full px-5 grid grid-cols-2 py-3 gap-4 my-7">
             {
-            cardData.map((card, index) => (
-              <SubCard 
+            termscardData.map((card, index) => (
+              <TermsCard 
                 key={index}
-                title={card.title}
                 subtitle={card.subtitle}
                 icon={card.icon}
+                headText={card.headText}
               />
             ))
           }
