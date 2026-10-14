@@ -2,17 +2,23 @@
 import { LoaderCircle } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as api from "@/lib/api";
+import { toast } from "sonner";
 
 function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const code = searchParams.get("code");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (isLoading || localStorage.getItem("authLoading")) return;
     const verifyTokens = async () => {
+      setIsLoading(true);
+      localStorage.setItem("authLoading", "true");
       if (!code) {
+        localStorage.removeItem("authLoading");
         window.location.replace(
           `${process.env.NEXT_PUBLIC_API_URL as string}/api/auth/hackclubauth?redirect_uri=${window.location.href}`,
         );
@@ -20,11 +26,20 @@ function AuthPage() {
         const res = await api.auth.authControllerHackclubAuthCallback({
           query: { code, redirect_uri: window.location.href },
         });
-        console.log(res);
+        if (res.error) {
+          toast.error("Error Signing in", {
+            description: (res.error as { message: string }).message,
+          });
+          router.push("/");
+        } else {
+          localStorage.setItem("userData", JSON.stringify(res.data));
+          router.push("/chat");
+        }
       }
+      localStorage.removeItem("authLoading");
     };
-    verifyTokens()
-  }, [code, router]);
+    verifyTokens();
+  }, [code, router, isLoading]);
 
   return code ? (
     <div className="flex items-center justify-center h-screen">

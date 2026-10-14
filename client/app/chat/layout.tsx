@@ -2,6 +2,7 @@
 
 import Header from "@/components/chat/Header";
 import Sidebar from "@/components/chat/Sidebar";
+import AuthProvider from "@/context/AuthProvider";
 
 export default function ChatLayout({
   children,
@@ -9,6 +10,7 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   return (
+    <AuthProvider>
     <div className="flex h-screen flex-col overflow-hidden">
       <Header />
 
@@ -20,5 +22,8 @@ export default function ChatLayout({
         </main>
       </div>
     </div>
+    </AuthProvider>
+  );
+}
   );
 }

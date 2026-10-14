@@ -1,16 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
 import Hero from "@/components/landingpage/Hero";
-import Prompt from "@/components/landingpage/Prompt";
 import Built from "@/components/landingpage/Built";
+import Prompt from "@/components/landingpage/Prompt";
+import Interactive from "@/components/landingpage/Interactive"
+import Subscription from "@/components/landingpage/Subscriptions";
 
 export default function Home() {
   return (
     <>
       <div>
         <Hero />
-        <Prompt />
         <Built />
+        <Interactive/>
+        <Subscription/>
       </div>
     </>
   );
