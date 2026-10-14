@@ -57,11 +57,8 @@ const CardProps = [
 
 const Built = () => {
   return (
-    <div className="w-full md:px-50 px-10 py-20  border border-zinc-200 my-10">
-      <div className="py-7">
-        <h1 className="font-semibold text-[35px]">
-          A peer at the next desk, not a corporate bot.
-    <div className={`w-full px-5 border dark:border-zinc-950 border-zinc-200 my-10 
+
+    <div className={`w-full md:px-50 px-10 py-20 border dark:border-zinc-950 border-zinc-200 my-10 
     `}>
         <div className='py-7'>
           <h1 className='font-semibold text-[35px]'>A peer at the next desk, not a corporate <br />
@@ -101,6 +98,7 @@ const Built = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

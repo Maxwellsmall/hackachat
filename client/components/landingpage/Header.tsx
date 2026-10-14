@@ -22,10 +22,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="sticky-top px-50 top-0 z-40 w-full border-b border-zinc-200/70 bg-[#FAFAFA]/90 backdrop-blur-md">
+      <div className="sticky top-0 z-40 w-full border-b border-zinc-200/70 dark:border-zinc-800 bg-[#FAFAFA]/90 dark:bg-zinc-950/90 backdrop-blur-md">
         <div className="flex justify-between items-center px-7 py-5">
-          <div className="flex justify-between items-center">
-            <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white shadow-xs group-hover: transition-colors">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-xs bg-zinc-900 text-white dark:bg-white dark:text-black transition-colors">
               <svg
                 className="w-4 h-4 text-white dark:text-black"
                 viewBox="0 0 24 24"
