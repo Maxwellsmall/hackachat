@@ -40,7 +40,7 @@ export default function () {
           <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-muted-foreground" />
           <Input
             value={search}
-            onChange={(e) => setSearch(e.target.value)
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search conversations..."
             className="h-8 pl-8 pr-2  text-xs bg-muted/40 border-border "
           />
