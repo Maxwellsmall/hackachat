@@ -9,9 +9,20 @@ import { useState } from "react";
 const Header = () => {
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if(element){
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      })
+    }
+  }
+
   return (
     <>
-      <div className="sticky-top top-0 z-40 w-full border-b border-zinc-200/70 bg-[#FAFAFA]/90 backdrop-blur-md">
+      <div className="sticky top-0 z-40 w-full border-b border-zinc-200/70 bg-[#FAFAFA]/90 backdrop-blur-md">
         <div className="flex justify-between items-center px-7 py-5">
           <div className="flex justify-between items-center">
             <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white shadow-xs group-hover: bg-zinc-800 transition-colors">
@@ -45,8 +56,10 @@ const Header = () => {
                   ? "text-sm font-bold text-zinc-900"
                   : "text-sm font-medium text-zinc-700 hover: text-zinc-900 transition-colors"
               }
+              onClick={() => scrollToSection("demo")}
             >
-              <Link href="/">Demo</Link>
+              Demo
+              {/* <Link href="/">Demo</Link> */}
             </p>
 
             <p
@@ -55,8 +68,10 @@ const Header = () => {
                   ? "text-sm font-bold text-zinc-900"
                   : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transition-colors"
               }
+              onClick={() => scrollToSection("whyfree")}
             >
-              <Link href="/whyfree">Why Free</Link>
+              Why Free
+              {/* <Link href="/whyfree">Why Free</Link> */}
             </p>
             <p
               className={
@@ -64,8 +79,10 @@ const Header = () => {
                   ? "text-sm font-bold text-zinc-900"
                   : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transitions-colors"
               }
+              onClick={() => scrollToSection("Privacy")}
             >
-              <Link href="/privacy">privacy</Link>
+              Privacy
+              {/* <Link href="/privacy">privacy</Link> */}
             </p>
             <Button
               onClick={() => setDarkMode(!darkMode)}

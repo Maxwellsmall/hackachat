@@ -32,7 +32,8 @@ const FAQ = () => {
       {
       id: "item-4",
       question: "Can i choose which model to use?",
-      answer: `Yes. Use the modal dropdown`
+      answer: `Yes. Use the modal dropdown at the top of the chat to switch between
+       available models returned live from  Hack Club AI, including Llama 3.3 70B and Mistral.`
     },
   ];
 
