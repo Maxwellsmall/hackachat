@@ -62,7 +62,8 @@ const CardProps = [
 
 const Built = () => {
   return (
-    <div className='w-full px-5 border border-zinc-200 my-10'>
+    <div className={`w-full px-5 border dark:border-zinc-950 border-zinc-200 my-10 
+    `}>
         <div className='py-7'>
           <h1 className='font-semibold text-[35px]'>A peer at the next desk, not a corporate <br />
           bot.
@@ -81,9 +82,9 @@ const Built = () => {
                  let footerStyles = "py-1"
 
                  if(card.variant === "colored"){
-                  footerStyles = "bg-zinc-100/20 border border-zinc-200 text-black py-5 px-3 rounded-md"
+                  footerStyles = "bg-zinc-100/20 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-black py-5 px-3 rounded-md"
                  } else if(card.variant === "bordered") {
-                    footerStyles = "border-t flex items-center border-zinc-200 py-5 px-3 rounded-md"
+                    footerStyles = "border-t flex items-center dark:border-zinc-700 border-zinc-200 py-5 px-3 rounded-md"
                  }
 
               return (
