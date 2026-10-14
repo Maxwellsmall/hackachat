@@ -1,7 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { SendHorizontal, Code2Icon, BookOpenIcon} from "lucide-react";
-import { title } from "process";
+import { SendHorizontal, Code2Icon, BookOpenIcon, RocketIcon, Lightbulb, MSquare} from "lucide-react";
 
 export default function Page() {
     const topicSuggestions = [
@@ -14,7 +13,26 @@ export default function Page() {
         {
             topic: "LEARNING",
             icon: BookOpenIcon,
-            title: "Break down a tricky concept"
+            title: "Break down a tricky concept",
+            details: "Can you explain how public-key cryptography works using an intuitive physical analogy without..."
+        },
+        {
+            topic: "BUILDING",
+            icon: RocketIcon,
+            title: "Plan a weekend hardware/web project",
+            details: "I want to build a small weekend project with an ESP32 or a web scraper. Can you give me 3..."
+        },
+        {
+            topic:"WRITTING",
+            icon: Lightbulb,
+            title: "Review my essay arguement & tone",
+            details: "Can you critique the reasoning and thesis statement of this essay draft? Tell me which claim"
+        },
+        {
+            topic: "Curiosity",
+            icon: "MSquare",
+            title : "Teach me how to make something under th hood",
+            details: "How does an operating system kernel actually switch between running processess on CPU?"
         }
     ]
   return (
