@@ -135,7 +135,7 @@ export type ChatControllerGetModelsData = {
 };
 
 export type ChatControllerGetModelsResponses = {
-    200: ModelResponseDto;
+    200: Array<ModelResponseDto>;
 };
 
 export type ChatControllerGetModelsResponse = ChatControllerGetModelsResponses[keyof ChatControllerGetModelsResponses];

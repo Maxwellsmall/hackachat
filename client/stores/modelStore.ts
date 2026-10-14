@@ -1,5 +1,5 @@
 import { ModelResponseDto } from "@/lib/api";
-import { createStore } from "zustand";
+import { create } from "zustand";
 
 interface ModelStore {
   models: ModelResponseDto[];
@@ -8,7 +8,7 @@ interface ModelStore {
   setActiveModel: (model: ModelResponseDto) => void;
 }
 
-export const useModelStore = createStore<ModelStore>()((set) => ({
+export const useModelStore = create<ModelStore>()((set) => ({
   models: [],
   setModels: (models) => set({ models }),
   activeModel: null,
