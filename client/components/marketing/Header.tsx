@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useTheme } from "next-themes" 
 
 const Header = () => {
   const pathname = usePathname();
-  const [darkMode, setDarkMode] = useState(false);
+  const {theme, setTheme} = useTheme();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -49,12 +49,12 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             <p
               className={
                 pathname === "/"
-                  ? "text-sm font-bold text-zinc-900"
-                  : "text-sm font-medium text-zinc-700 hover: text-zinc-900 transition-colors"
+                  ? "text-sm font-bold text-zinc-900 cursor-pointer"
+                  : "text-sm font-medium text-zinc-700 hover: text-zinc-900 cursor-pointer transition-colors"
               }
               onClick={() => scrollToSection("demo")}
             >
@@ -65,8 +65,8 @@ const Header = () => {
             <p
               className={
                 pathname === "/whyfree"
-                  ? "text-sm font-bold text-zinc-900"
-                  : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transition-colors"
+                  ? "text-sm font-bold text-zinc-900 cursor-pointer"
+                  : "text-sm font-medium text-zinc-700 cursor-pointer hover:text-zinc-900 transition-colors"
               }
               onClick={() => scrollToSection("whyfree")}
             >
@@ -76,8 +76,8 @@ const Header = () => {
             <p
               className={
                 pathname === "/privacy"
-                  ? "text-sm font-bold text-zinc-900"
-                  : "text-sm font-medium text-zinc-700 hover:text-zinc-900 transitions-colors"
+                  ? "text-sm font-bold text-zinc-900 cursor-pointer"
+                  : "text-sm font-medium text-zinc-700 cursor-pointer hover:text-zinc-900 transitions-colors"
               }
               onClick={() => scrollToSection("Privacy")}
             >
@@ -85,11 +85,16 @@ const Header = () => {
               {/* <Link href="/privacy">privacy</Link> */}
             </p>
             <Button
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="hover:bg-transparent bg-white/15 text-zinc-900"
             >
-              {darkMode ? <Sun /> : <Moon />}
+              {theme === "dark" ? <Sun /> : <Moon />}
             </Button>
+              <Link href={"/chat"}>
+              <Button className="bg-transparent text-black border border-zinc-400 hover:bg-zinc-100">
+                Sign In     
+              </Button>
+            </Link>
             <Link href={"/chat"}>
               <Button>
                 Open Chat
