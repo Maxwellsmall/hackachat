@@ -62,9 +62,23 @@ export type UserDataDto = {
     customInstruction: string;
 };
 
+export type MessageContentTextDto = {
+    type: 'text';
+    text: string;
+};
+
+export type MessageContentImageDto = {
+    type: 'file';
+    /**
+     * Image as base64 data URL
+     */
+    data: string;
+    mediaType: 'image/png' | 'image/jpeg' | 'image/webp' | 'image/gif';
+};
+
 export type MessageDto = {
-    role: 'system' | 'user' | 'assistant';
-    content: string;
+    role: 'user' | 'assistant';
+    content: Array<MessageContentTextDto | MessageContentImageDto>;
 };
 
 export type SendMessageDto = {
@@ -78,9 +92,13 @@ export type ChatResponseUsageDto = {
     outputToken: number;
 };
 
+export type MessageContentTextResponseDto = {
+    [key: string]: unknown;
+};
+
 export type ChatResponseObjectDto = {
     role: string;
-    content: string;
+    content: MessageContentTextResponseDto;
 };
 
 export type ChatResponseDto = {

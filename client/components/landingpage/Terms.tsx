@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CircleGauge, Cpu, Info, ShieldCheck } from "lucide-react";
+import { CircleGauge, Computer, Info, ShieldCheck } from "lucide-react";
 import TermsCard from "../landingpage/TermsCard";
 
 const Terms = () => {
@@ -12,7 +12,7 @@ const Terms = () => {
                saved locally in your browser storage. If you clear your 
                browser data or switch devices, chats won’t follow you unless
                you export them.`,
-      icon: <Cpu className="w-4 h-4" />,
+      icon: <Computer className="w-4 h-4" />,
     },
     {
       headText: "What goes through the API",
