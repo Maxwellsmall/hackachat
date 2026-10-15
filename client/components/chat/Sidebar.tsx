@@ -26,7 +26,7 @@ export default function () {
             <div className="leading-tight">
               <span className="font-display font-semibold text-sm tracking-tight text-ackground block ">
                 Hackachat
-              </span>
+              </span> 
               <span className="text-[10px] text-muted-foreground block">
                 Third Space
               </span>
