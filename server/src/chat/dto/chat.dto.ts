@@ -2,13 +2,15 @@ import {
   IsArray,
   IsEnum,
   IsNumber,
-  IsObject,
   IsString,
+  Matches,
   Max,
+  MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 
 enum ResponseDetailLevel {
   short = 'short',
@@ -20,7 +22,21 @@ enum MessageRole {
   assistant = 'assistant',
 }
 
+enum FileEnum {
+  file = 'file',
+}
+enum TextEnum {
+  text = 'text',
+}
+
 type MessageRoleValues = `${MessageRole}`;
+
+const IMAGE_TYPE = [
+  `image/png`,
+  'image/jpeg',
+  'image/webp',
+  'image/gif',
+] as const;
 
 export class UserDataDto {
   @ApiProperty()
@@ -48,39 +64,76 @@ export class ModelConfigDto {
 }
 
 export class MessageContentImageDto {
-  type!: 'file';
-  data!: URL;
+  @ApiProperty({ default: FileEnum.file, enum: FileEnum })
+  @IsEnum(FileEnum)
+  type!: `${FileEnum}`;
+
+  @ApiProperty({
+    example: 'data:image/jpeg;base64,.....',
+    description: 'Image as base64 data URL',
+  })
+  @IsString()
+  @MaxLength(3_000_000)
+  @Matches(/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/)
+  data!: string;
+
+  @ApiProperty({ enum: IMAGE_TYPE })
+  @IsString()
   mediaType!: string;
 }
 export class MessageContentTextDto {
-  type!: 'text';
+  @ApiProperty({ default: TextEnum.text, enum: TextEnum })
+  @IsEnum(TextEnum)
+  type!: `${TextEnum}`;
+
+  @ApiProperty()
+  @IsString()
+  @MaxLength(20000)
   text!: string;
 }
 
+@ApiExtraModels(MessageContentTextDto, MessageContentImageDto)
 export class MessageDto {
   @ApiProperty({ enum: MessageRole })
   @IsEnum(MessageRole)
   role!: MessageRoleValues;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({
+    type: 'array',
+    items: {
+      oneOf: [
+        { $ref: getSchemaPath(MessageContentTextDto) },
+        { $ref: getSchemaPath(MessageContentImageDto) },
+      ],
+    },
+  })
+  @Type(() => Object, {
+    discriminator: {
+      property: 'type',
+      subTypes: [
+        { name: 'text', value: MessageContentTextDto },
+        { name: 'file', value: MessageContentTextDto },
+      ],
+    },
+    keepDiscriminatorProperty: true,
+  })
   content!: (MessageContentImageDto | MessageContentTextDto)[];
 }
 
 export class SendMessageDto {
   @ApiProperty({ type: ModelConfigDto })
+  @ValidateNested()
   @Type(() => ModelConfigDto)
-  @IsObject()
   modelConfig!: ModelConfigDto;
 
   @ApiProperty({ type: UserDataDto })
+  @ValidateNested()
   @Type(() => UserDataDto)
-  @IsObject()
   userData!: UserDataDto;
 
   @ApiProperty({ type: [MessageDto] })
   @Type(() => MessageDto)
-  @IsObject({ each: true })
+  @ValidateNested({ each: true })
   @IsArray()
   messages!: MessageDto[];
 }
