@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { PanelLeft, Plus, Settings, Home } from 'lucide-react'
 import { Button } from '../ui/button';
-// import { ModelPicker } from './ModelPicker'
+import { ModelPicker } from '@/components/chat/ModelPicker'
 
 
 interface  ChatHeaderProps {
@@ -47,10 +47,10 @@ export default function Header(){
      </div>
 
      <div className="flex items-center gap-1.5 shrink-0">
-        {/* <ModelPicker
-        currentModel={currentModel}
-        onModelChange={onModelChange}
-        /> */}
+        <ModelPicker
+      //   currentModel={currentModel}
+      //   onModelChange={onModelChange}
+        />
 
         <Button 
         variant="ghost"
@@ -64,12 +64,14 @@ export default function Header(){
 
         <Button
         variant="ghost"
-        size="icon"
-        
         className="h-8 w-8 text-muted-foreground hover:text-foreground"
         title="Settings"
         >
          <Settings className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" className="border-border flex items-center">
+         <div className="bg-black p-1 px-2 rounded-md text-white text-xs">H</div>
+         <p className='text-xs font-normal'>sign in</p> 
         </Button>
      </div>
    </header>
