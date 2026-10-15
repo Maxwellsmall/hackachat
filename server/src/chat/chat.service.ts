@@ -18,7 +18,7 @@ export class ChatService {
   ) {}
 
   async getModels(): Promise<ModelResponseDto[]> {
-    const modelRes = await this.httpClient.get<ModelResponseDto[]>(
+    const modelRes = await this.httpClient.get<{ data: ModelResponseDto[] }>(
       'https://ai.hackclub.com/proxy/v1/models',
     );
 
@@ -27,7 +27,7 @@ export class ChatService {
         'Failed to fetch models from hacklcub proxy',
       );
 
-    return modelRes.data;
+    return modelRes.data.data;
   }
 
   async sendMessage(sendMessageDto: SendMessageDto): Promise<ChatResponseDto> {
