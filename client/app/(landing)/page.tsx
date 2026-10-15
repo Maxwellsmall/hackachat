@@ -1,6 +1,5 @@
 import Hero from "@/components/landingpage/Hero";
 import Built from "@/components/landingpage/Built";
-import Prompt from "@/components/landingpage/Prompt";
 import Interactive from "@/components/landingpage/Interactive";
 import Subscription from "@/components/landingpage/Subscriptions";
 import Terms from "@/components/landingpage/Terms";

@@ -1,6 +1,5 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   SendHorizontal,
   Code2Icon,
@@ -62,8 +61,11 @@ export default function Page() {
               Hackachat guide you step-by-step so you learn by doing.
             </p>
             <div className="grid col-span-2 grid-cols-2 shrink-0 gap-3 mt-3">
-              {topicSuggestions.map((topics) => (
-                <div className="border p-5 bg-muted/40 text-black gap-y-px text-left rounded-md cursor-pointer hover:bg-zinc-100 hover:border-black">
+              {topicSuggestions.map((topics, idx) => (
+                <div
+                  key={idx}
+                  className="border p-5 bg-muted/40 text-black gap-y-px text-left rounded-md cursor-pointer hover:bg-zinc-100 hover:border-black"
+                >
                   <div className="flex text-start justify-start items-center m-2">
                     <span className="text-zinc-500">{topics.icon}</span>
                     <p className="text-[10px] ml-2 text-zinc-500">

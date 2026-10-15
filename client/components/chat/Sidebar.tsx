@@ -2,25 +2,14 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Card } from "../ui/card";
-import {
-  Plus,
-  Search,
-  MessageSquare,
-  Trash2,
-  Edit2,
-  Check,
-  X,
-  Settings,
-} from "lucide-react";
-import { AlertDialogTrigger, AlertDialog } from "@/components/ui/alert-dialog";
-import {SettingsModal} from "@/components/chat/SettingsModal"
+import { Search, MessageSquare, Settings } from "lucide-react";
+import { useDialogContext } from "@/context/DialogProvider";
 
-export default function () {
+export default function Sidebar() {
   const [search, setSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setOpenSettingsDialog } = useDialogContext();
   return (
-    <aside className="flex flex-col h-full w-[300px] shrink-0 bg-card border-r border-border select-none">
+    <aside className="flex flex-col h-full w-75 shrink-0 bg-card border-r border-border select-none">
       <div className="p-3 border-b border-border space-y-2 shrink-0">
         <div className="flex item-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -73,19 +62,15 @@ export default function () {
             Sign in with Hack Club
           </span>
         </Button>
-          <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <AlertDialogTrigger asChild>
-          <Button
-            variant={"ghost"}
-            className="shrink-0 flex justify-start items-center mx-4 mt-1 w-50"
-            onClick={() => setIsModalOpen}
-          >
-            <Settings size="20" className="text-zinc-600" />
-            <p className="text-xs text-zinc-500 ml-2">Settings</p>
-          </Button>
-        </AlertDialogTrigger>
-            <SettingsModal />
-          </AlertDialog>
+
+        <Button
+          variant={"ghost"}
+          className="shrink-0 flex justify-start items-center mx-4 mt-1 w-50"
+          onClick={() => setOpenSettingsDialog(true)}
+        >
+          <Settings size="20" className="text-zinc-600" />
+          <p className="text-xs text-zinc-500 ml-2">Settings</p>
+        </Button>
       </div>
     </aside>
   );

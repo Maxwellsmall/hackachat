@@ -112,7 +112,7 @@ const Interactive = () => {
 
             <div className="py-8 px-22 w-full bg-white">
               <div className="flex w-full py-2 items-center justify-between">
-                <div className="bg-black rounded-md py-[1px] px-2">
+                <div className="bg-black rounded-md py-px px-2">
                   <span className="text-white text-xs font-semibold">
                     HACKACHAT
                   </span>
@@ -130,7 +130,7 @@ const Interactive = () => {
               </div>
               <p className="text-sm">
                 Here is the clean, idiomatic way to read a file using a{" "}
-                <span className="py-[1px] rounded-md px-2 bg-zinc-200 text-xs">
+                <span className="py-px rounded-md px-2 bg-zinc-200 text-xs">
                   with
                 </span>{" "}
                 context manager:
@@ -166,7 +166,7 @@ const Interactive = () => {
               <div className="flex flex-col items-start justify-center my-4">
                 <p className="text-black font-semibold text-sm">
                   What could go wrong without{" "}
-                  <span className="py-[1px] rounded-md px-2 bg-zinc-200 text-xs">
+                  <span className="py-px rounded-md px-2 bg-zinc-200 text-xs">
                     with
                   </span>{" "}
                   ?
@@ -177,7 +177,7 @@ const Interactive = () => {
                     Dangling file handles:
                   </span>{" "}
                   If an exception occurs before{" "}
-                  <span className="py-[1px] rounded-md px-2 bg-zinc-200 text-xs">
+                  <span className="py-px rounded-md px-2 bg-zinc-200 text-xs">
                     f.close()
                   </span>
                   , the OS keeps the file locked in memory.
@@ -190,7 +190,7 @@ const Interactive = () => {
                   On Windows, default encoding is often Windows-1252, which
                   crashes on emojis or special symbols unless you explicitly
                   pass{" "}
-                  <span className="py-[1px] rounded-md px-2 bg-zinc-200 text-xs">
+                  <span className="py-px rounded-md px-2 bg-zinc-200 text-xs">
                     encoding=&quot;utf-8&quot;
                   </span>
                   .
