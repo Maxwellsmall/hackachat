@@ -13,7 +13,7 @@ const AuthContext = createContext<AuthContext | null>(null);
 
 export const useAuthContext = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("Auth Context not found");
+  if (!ctx) throw new Error("AuthContext used outside o scope");
   return ctx;
 };
 
