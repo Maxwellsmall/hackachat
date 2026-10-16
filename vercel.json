@@ -13,7 +13,6 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"],
       "destination": {
         "service": "server"
       }
