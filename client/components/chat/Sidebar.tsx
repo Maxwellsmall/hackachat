@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export default function Sidebar() {
   const [search, setSearch] = useState("");
   const { setOpenSettingsDialog } = useDialogContext();
-  const { listChats, chats } = useChatStore();
+  const { listChats, chats, createChat } = useChatStore();
   useEffect(() => {
     listChats();
   }, [listChats]);
@@ -60,7 +60,9 @@ export default function Sidebar() {
             <p className="text-center text-sm">No Chats yet.</p>
           </div>
         ) : (
-          chats.map((chat) => <ChatCard key={chat.id} chat={chat} />)
+          chats
+            .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()))
+            .map((chat) => <ChatCard key={chat.id} chat={chat} />)
         )}
       </div>
       <div className="shrink-0 p-3 border-t border-border flex flex-col justify-center items-center">
