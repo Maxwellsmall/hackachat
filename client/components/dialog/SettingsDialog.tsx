@@ -14,10 +14,13 @@ import {
   Database,
   Dot,
   Download,
+  Heart,
   Info,
+  Key,
   Laptop,
   Moon,
   Settings,
+  ShieldCheck,
   Sliders as SlidersIcon,
   Sun,
   Trash,
@@ -263,14 +266,38 @@ export default function SettingsDialog() {
               </Button>
             </div>
             <hr className="my-4" />
-            <div>
+            <div className="space-y-2">
               <div className="flex gap-3">
-                <Code size={16} />{" "}
+                <Code size={16} />
                 <p className="max-w-90 text-xs">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-                  sed cumque consequatur delectus accusamus repellendus
-                  aspernatur magni repudiandae asperiores nulla! Hic laudantium,
-                  esse sapiente deserunt ducimus iste fuga quia earum?
+                  Hackachat was built by coders at Hack club during Third Space
+                  YSWS. It&apos;s built with Nextjs/React, TailwindCSS,
+                  shadcn/ui components, Nestjs and swagger, connected to HAck
+                  Club&apos;s OpenAI compatibility proxy.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Key size={16} />
+                <p className="max-w-90 text-xs">
+                  Integrated with Hackclub Auth (<Kbd>auth.hackclub.com</Kbd>)
+                  for unified member authentication
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <ShieldCheck size={16} />
+                <p className="max-w-90 text-xs">
+                  Request stream securely through the Hack Club AI proxy (
+                  <Kbd>ai.hackclub.com</Kbd>). History are stored in your
+                  browser IndexDB.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Heart size={16} />
+                <p className="max-w-90 text-xs">
+                  Not affiliated with OpenAI, Meta, or Google. Free community
+                  tool for teenagers who love to build. Hack Club is a
+                  registered 501(c)(3) nonprofit network of high school coding
+                  clubs.
                 </p>
               </div>
             </div>
