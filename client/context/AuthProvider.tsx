@@ -25,7 +25,7 @@ export default function AuthProvider({
   const router = useRouter();
   const [user, setUser] = useState<AuthResponseDto | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { setModels } = useModelStore();
+  const { setModels, setActiveModel } = useModelStore();
 
   useEffect(() => {
     const load = async () => {
@@ -36,6 +36,9 @@ export default function AuthProvider({
         setIsLoading(false);
       }
 
+      const selectedModel = localStorage.getItem("selectedModel");
+      if (selectedModel) setActiveModel(JSON.parse(selectedModel));
+
       const res = await api.chat.chatControllerGetModels({});
       if (res.data) {
         setModels(res.data);
@@ -43,7 +46,7 @@ export default function AuthProvider({
       }
     };
     load();
-  }, [router, setModels]);
+  }, [router, setActiveModel, setModels]);
 
   return !isLoading ? (
     <AuthContext.Provider value={{ user, setUser }}>

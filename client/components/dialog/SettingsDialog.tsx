@@ -29,15 +29,7 @@ import {
 import { Button } from "../ui/button";
 import { Kbd } from "../ui/kbd";
 import { Switch } from "../ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { useModelStore } from "@/stores/modelStore";
-import { ModelResponseDto } from "@/lib/api";
 import {
   Combobox,
   ComboboxContent,
@@ -136,7 +128,14 @@ export default function SettingsDialog() {
             <div className="space-y-2">
               <p>DEFAULT MODEL</p>
 
-              <Combobox items={models.map((m) => m.name)}>
+              <Combobox
+                items={models.map((m) => m.name)}
+                value={activeModel?.name}
+                onValueChange={(value) =>
+                  setActiveModel(models.find((m) => m.name === value)!)
+                }
+                autoHighlight
+              >
                 <ComboboxInput placeholder="Select a model" />
                 <ComboboxContent>
                   <ComboboxEmpty>No model found</ComboboxEmpty>
@@ -146,7 +145,7 @@ export default function SettingsDialog() {
                         <span className="font-semibold">{item}</span>
                         <br />
                         <span>
-                          {models.find((m) => m.name === item)!.canonical_slug}
+                          {models.find((m) => m.name === item)?.canonical_slug}
                         </span>
                       </ComboboxItem>
                     )}

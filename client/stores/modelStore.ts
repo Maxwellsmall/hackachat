@@ -12,5 +12,8 @@ export const useModelStore = create<ModelStore>()((set) => ({
   models: [],
   setModels: (models) => set({ models }),
   activeModel: null,
-  setActiveModel: (model) => set({ activeModel: model }),
+  setActiveModel: (model) => {
+    set({ activeModel: model });
+    localStorage.setItem("selectedModel", JSON.stringify(model));
+  },
 }));

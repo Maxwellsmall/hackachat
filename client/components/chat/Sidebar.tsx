@@ -1,13 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Search, MessageSquare, Settings } from "lucide-react";
+import { Plus, Search, Settings } from "lucide-react";
 import { useDialogContext } from "@/context/DialogProvider";
+import { useChatStore } from "@/stores/chatStore";
+import ChatCard from "./ChatCard";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
   const [search, setSearch] = useState("");
   const { setOpenSettingsDialog } = useDialogContext();
+  const { listChats, chats } = useChatStore();
+  useEffect(() => {
+    listChats();
+  }, [listChats]);
+
+  const router = useRouter();
+
   return (
     <aside className="flex flex-col h-full w-75 shrink-0 bg-card border-r border-border select-none">
       <div className="p-3 border-b border-border space-y-2 shrink-0">
@@ -26,7 +36,12 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-        <Button className="w-full text-left"> + New Chat</Button>
+        <Button
+          className="w-full text-left"
+          onClick={() => router.push("/chat")}
+        >
+          <Plus /> New Chat
+        </Button>
       </div>
       <div className="px-3 pt-3 pb-1 shrink-0">
         <div className="relative">
@@ -40,15 +55,13 @@ export default function Sidebar() {
         </div>
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto">
-        <div className="">
-          <div className="mx-3 p-2 flex bg-muted/40  border rounded-md mt-2 gap-3 h-full">
-            <MessageSquare className="text-zinc-400 shrink-0" />
-            <div className="w-full">
-              <p className="text-bold text-xs -mb-2.5">New Chat</p>
-              <span className="text-[10px] text-zinc-700">Just Now</span>
-            </div>
+        {chats.length === 0 ? (
+          <div className="my-10">
+            <p className="text-center text-sm">No Chats yet.</p>
           </div>
-        </div>
+        ) : (
+          chats.map((chat) => <ChatCard key={chat.id} chat={chat} />)
+        )}
       </div>
       <div className="shrink-0 p-3 border-t border-border flex flex-col justify-center items-center">
         <Button

@@ -1,40 +1,39 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
+"use client";
+import { useModelStore } from "@/stores/modelStore";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSubContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useState } from "react"
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "../ui/combobox";
 
 export function ModelPicker() {
-  const [model, setModel] = useState("")
+  const { models, activeModel, setActiveModel } = useModelStore();
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" className="text-[11px] border-border">{model ? model : "lLama 3.370b instruct"}</Button>} />
-      <DropdownMenuContent>
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>Available Models</DropdownMenuLabel>
-          <DropdownMenuItem className="text-[11px]" onClick={() => setModel("Pareto latest")}>
-            Pareto latest
-          </DropdownMenuItem>
-          <DropdownMenuItem className="text-[11px]" onClick={() => setModel("gemini 4 argon")}>
-            gemini 4 argon
-          </DropdownMenuItem>
-          <DropdownMenuItem className="text-[11px]" onClick={() => setModel("gemini nano banana 2.1")}>
-            gemini nano banana 2.1
-          </DropdownMenuItem>
-          
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+    <Combobox
+      items={models.map((m) => m.name)}
+      value={activeModel?.name}
+      onValueChange={(value) =>
+        setActiveModel(models.find((m) => m.name === value)!)
+      }
+      autoHighlight
+    >
+      <ComboboxInput placeholder="Select a model" />
+      <ComboboxContent>
+        <ComboboxEmpty>No model found</ComboboxEmpty>
+        <ComboboxList>
+          {(item) => (
+            <ComboboxItem key={item} value={item}>
+              <span className="font-semibold">{item}</span>
+              <br />
+              <span>{models.find((m) => m.name === item)?.canonical_slug}</span>
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
 }

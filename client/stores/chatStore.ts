@@ -1,7 +1,5 @@
 import { create } from "zustand";
 import { db, StoredChat, StoredMessage } from "@/lib/db";
-import { ChatResponseDto } from "@/lib/api";
-import { IdCard } from "lucide-react";
 
 interface ChatStore {
   chats: StoredChat[];
