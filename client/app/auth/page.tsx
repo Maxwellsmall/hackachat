@@ -2,14 +2,14 @@
 import { LoaderCircle } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import * as api from "@/lib/api";
 import { toast } from "sonner";
 
-function AuthPage() {
+function AuthPageContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const code = searchParams.get("code");
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -57,6 +57,27 @@ function AuthPage() {
     </div>
   ) : (
     <></>
+  );
+}
+
+function AuthPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-screen items-center justify-center">
+          <div className="flex items-center gap-3">
+            <HugeiconsIcon
+              icon={LoaderCircle}
+              className="animate-spin"
+              size={36}
+            />
+            <h1 className="text-xl">Loading authentication</h1>
+          </div>
+        </div>
+      }
+    >
+      <AuthPageContent />
+    </Suspense>
   );
 }
 
