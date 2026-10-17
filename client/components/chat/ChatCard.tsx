@@ -38,7 +38,7 @@ export default function ChatCard({ chat }: { chat: StoredChat }) {
         <div className="flex gap-3 h-full">
           <MessageSquare className="text-zinc-400 shrink-0" />
           <div className="w-full">
-            <p className="text-bold text-xs -mb-2.5">{chat.title}</p>
+            <p className="font-semibold text-xs -mb-2.5">{chat.title}</p>
             <span className="text-[10px] text-zinc-700">
               {formatRelativeDate(chat.updatedAt)}
             </span>

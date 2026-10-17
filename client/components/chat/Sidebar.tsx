@@ -6,12 +6,12 @@ import { Plus, Search, Settings } from "lucide-react";
 import { useDialogContext } from "@/context/DialogProvider";
 import { useChatStore } from "@/stores/chatStore";
 import ChatCard from "./ChatCard";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 export default function Sidebar() {
   const [search, setSearch] = useState("");
   const { setOpenSettingsDialog } = useDialogContext();
-  const { listChats, chats, createChat } = useChatStore();
+  const { listChats, chats } = useChatStore();
   useEffect(() => {
     listChats();
   }, [listChats]);
