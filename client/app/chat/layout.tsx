@@ -12,7 +12,7 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <DialogProvider>
         <div className="flex h-screen flex-col overflow-hidden">
           <Header />
@@ -27,6 +27,6 @@ export default function ChatLayout({
         </div>
         <SettingsDialog />
       </DialogProvider>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
